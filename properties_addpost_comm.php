@@ -36,34 +36,34 @@ if(!$session->logged_in){
 <body>
 <div id="warp">
 
-<div class="logo"><a href="index_properties.php"><img src="images/logo.png" alt="Redail Logo" /></a></div>
+<div class="logo"><a href="index_properties.html"><img src="images/logo.png" alt="Redail Logo" /></a></div>
 
-<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; <?php echo $_SESSION['username'] ?> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="process.php">Logout</a></span>
+<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; Naresh &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#">Logout</a></span>
 <div class="top_menu">
-<a href="messagehistory.php">S & S History</a>|
-<a href="appointments.php">Appointments</a>|
-<a href="agents/agents_new.php">Bulk</a>|
-<a href="buyers.php">Buyers</a>|
-<a href="complaintbox.php">Complaints</a>|
-<a href="domods.php">Do-Mod's</a>|
-<a href="msms.php">M-SMS</a>
+<a href="messagehistory.html">S & S History</a>|
+<a href="appointments.html">Appointments</a>|
+<a href="agents/agents_new.html">Bulk</a>|
+<a href="buyers.html">Buyers</a>|
+<a href="complaintbox.html">Complaints</a>|
+<a href="domods.html">Do-Mod's</a>|
+<a href="msms.html">M-SMS</a>
 </div>
 
 <div class="top_icons" style="float:left; margin:40px 0 0 250px;">
-<a href="properties_add.php" class="active"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
+<a href="properties_add.html" class="active"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
 </div>
 
 <!--<div class="connect_people">Connecting properties & people in one dial <br />
 <a href="#">040 - 22222224</a></div>-->
 
 <ul id="nav-reflection2">
-<li><a href="properties_add.php" class="active">Properties</a></li>
-<li class="button-color-1"><a href="projects_add.php">Projects</a></li>		
+<li><a href="properties_add.html" class="active">Properties</a></li>
+<li class="button-color-1"><a href="projects_add.html">Projects</a></li>		
 </ul>
 
 <div style="width:100%; float:left;">
 
-<div class="main_hed" style="margin-top:9px;">List property > Properties > Commercial > <span>Properties List</span> <div class="inner_menu"><a href="properties_add.php">Residential</a>|<a href="properties_add_comm.php" class="active">Commercial</a>|<a href="properties_add_ag.php" style="padding-right:0px;">Agriculture</a>
+<div class="main_hed" style="margin-top:9px;">List property > Properties > Commercial > <span>Properties List</span> <div class="inner_menu"><a href="properties_add.html">Residential</a>|<a href="properties_add_comm.html" class="active">Commercial</a>|<a href="properties_add_ag.html" style="padding-right:0px;">Agriculture</a>
 </div></div>
 
 

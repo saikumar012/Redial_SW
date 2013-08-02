@@ -141,7 +141,7 @@ class MySQLDB
     * info into the database. Appropriate user level is set.
     * Returns true on success, false otherwise.
     */
-   function addNewUser($division, $department, $name, $mobile, $email, $empid, $city, $whrereincity, $zone, $username, $password){
+   function addNewUser($username, $password, $email, $empid, $mobile, $active){
       $time = time();
       /* If admin sign up, give admin user level */
       if(strcasecmp($username, ADMIN_NAME) == 0){
@@ -155,7 +155,7 @@ class MySQLDB
 	  $active = 0;
 	  }
 	  
-      $q = "INSERT INTO ".TBL_USERS." VALUES ('','$division', '$department', '$name', '$mobile', '$email', '$empid', '$city', '$whrereincity', '$zone', '$username', '$password', '0', '$ulevel', '$time', '0')";
+      $q = "INSERT INTO ".TBL_USERS." VALUES ('','$username', '$password', '0', $ulevel, '$email', $time, '$empid', '$mobile', $active)";
 	  return mysql_query($q, $this->connection); 
    }
    
@@ -163,8 +163,8 @@ class MySQLDB
     * updateUserField - Updates a field, specified by the field
     * parameter, in the user's row of the database.
     */
-   function updateUserField($division, $department, $name, $mobile, $email, $empid, $city, $whrereincity, $zone, $username, $orempid){
-      $q = "UPDATE ".TBL_USERS." SET division = '$division', department = '$department', name = '$name', mobile = '$mobile', email = '$email', EmployeeId = '$empid', EmployeeId = '$empid', city = '$city', whrereincity = '$whrereincity', zone = '$zone', username = '$username'  WHERE id = '$orempid'";
+   function updateUserField($username, $email, $empid, $mobile, $active, $orempid){
+      $q = "UPDATE ".TBL_USERS." SET username = '$username', email = '$email', EmployeeId = '$empid', Mobile = '$mobile', Active = '$active' WHERE Id = '$orempid'";
 	  echo $q;
 	  //exit;
 
@@ -299,7 +299,7 @@ class MySQLDB
       return mysql_query($query, $this->connection);
    }
    function getUserList(){
-		$q = "select Id, division, department, name, mobile, email, EmployeeId, city, whrereincity, zone, username, userid, Active from ".TBL_USERS." where userlevel = 1 ORDER BY `timestamp` DESC";
+		$q = "select Id, username, userid, email, EmployeeId, Mobile, Active from ".TBL_USERS." where userlevel = 1 ORDER BY `timestamp` DESC";
 		if($result = mysql_query($q)){
 		return $result;
 		}else{
@@ -307,7 +307,7 @@ class MySQLDB
 		}	
 	}
 	function getUserListById($id){
-	$q = "select Id, division, department, name, mobile, email, EmployeeId, city, whrereincity, zone, username, userid, Active from ".TBL_USERS." where Id = '$id' AND userlevel = 1";		
+	$q = "select Id, username, userid, email, EmployeeId, Mobile, Active from ".TBL_USERS." where Id = '$id' AND userlevel = 1";		
 		if($result = mysql_query($q)){
 		return $result;
 		}else{
@@ -315,22 +315,24 @@ class MySQLDB
 		}	
 	}
 	function getCityList(){
-		$q = "select * from city order by city ASC";
-		$result = mysql_query($q);
-			return $result;
+		$q = "select * from city";
+		$result = $this->query($q);
+		print_r($result);
+		return $result;
 	}
 	function getCityList_search($id){
 		$q = "select * from city where sno='$id'";
 		$result = mysql_query($q);
 			return $result;
 	}
-	function getPropertyList(){
-		$q = "select * from propertytype";
-		$result = mysql_query($q);
-			return $result;
-	}
-	function getPropertyList_search($id){
-		$q = "select * from propertytype where sno='$id'";
+    function getLocationList($city){
+        $q = "select * from location where `city_id`='$city'";
+        $result = $this->query($q);
+        return $result;
+    }
+
+	function getPropertyList($type){
+		$q = "select * from propertytype where `category`='$type'";
 		$result = mysql_query($q);
 			return $result;
 	}
@@ -339,291 +341,83 @@ class MySQLDB
 		$result = mysql_query($q);
 			return $result;
 	}
-	function getlocation_search($id){
-		$q = "select location from location where sno='$id'";
-		$result = mysql_query($q);
-			return $result;
-	}
-	function getLocationList($id){
-		$q = "select sno,location from location where city_id = '$id'";
-		$result = mysql_query($q);
-			return $result;
-	}
-	function getPropertiesList($id,$id1){
-		$q = "select * from projects where Ptype = '$id' and ProjectType = '$id1'";
-		$result = mysql_query($q);
-			return $result;
-	}
-	/////newly added
-	function getPropertiesList1($id,$id1){
-		$q = "select * from projects where Ptype = '$id' and ProjectType = '$id1'";
-		//$result = mysql_query($q);
-			return $q;
-	}
-	/*function getPropertiesList1(){
-		$q = "select * from projects where Ptype = '1' and ProjectType = '1'";
-		$result = mysql_query($q);
-			return $result;
-	}
-	function getPropertiesList2(){
-		$q = "select * from projects where Ptype = '2' and ProjectType = '1'";
-		$result = mysql_query($q);
-			return $result;
-	}
-	function getPropertiesList3(){
-		$q = "select * from projects where Ptype = '2' and ProjectType = '2'";
-		$result = mysql_query($q);
-			return $result;
-	}*/
-	function getProjectList(){
-	$q = "select * from projects where Ptype = 2";
-		$result = mysql_query($q);
-			return $result;
-	}
-	function getCurrentProjectHistory($id){
-	$q = "select * from projects where Ptype = 2 AND id = '$id'";
-	$result = mysql_query($q);
-		return $result;
-	}
-	function getProjectH(){
-	$q = "select * from projects where Pid like % 'PJ%'";
-	$result = mysql_query($q);
-		return $result;
-	}
-	function getProjectH1(){
-	$q = "select * from projects where Pid like % 'PR%'";
-	$result = mysql_query($q);
-		return $result;
-	}
+    function getMinPrice(){
+        // needs to write order by price and type
+        $q = "SELECT * FROM minimum";
+        $result = $this->query($q);
+        return $result;
+    }
+    function getMaxprice(){
+        // needs to write order by price and type
+        $q = "SELECT * FROM maximum";
+        $result = $this->query($q);
+        return $result;
+    }
 
-	function getCurrentPropertyHistory($id){
-	$q = "select * from projects where Ptype = 1 AND id = '$id'";
-	$result = mysql_query($q);
-		return $result;
-	}
-	function getAgentsList($id){
-	$q = "select * from agents where ptype = '$id'";
-	$result = mysql_query($q);
-		return $result;
-	}
-	function getAgentsList1($id){
-	$q = "select * from agents where ptype = '$id'";
-	//$result = mysql_query($q);
-		return $q;
-	}
-	function getAgentsList2($id){
-	$q = "select * from agents where `id`= '$id'";
-	   $result = mysql_query($q);
-		return $result;
-	}
-	function getCurrentAgentData($id){
-	$q = "selcet * from agents where id = '$id' ";
-	$result = mysql_query($q);
-		return $result; 
-	}
-	function getCurrentAgentData1($id){
-	$q = "SELECT * FROM `agents` WHERE  AgentID = '$id' ";
-	$result = mysql_query($q);
-		return $result; 
-	}
-	function del_getCurrentAgentData1($id){
-	$q = "SELECT * FROM `del_agents` WHERE  AgentID = '$id' ";
-	$result = mysql_query($q);
-		return $result; 
-	}
-	function getBuyersList($id){
-	$q = "select * from buyers where ProjectType = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getBuyList($id){
-	$q = "select * from buyers where Buyerid = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-    function del_getBuyList($id){
-	$q = "select * from del_buyers where Buyerid = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	//////////////////////////////
-	function getBuyersListz($id){
-	$q = "select * from buyers where id = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	////////////////////////////////////
-	function getBuyersList2($id){
-	$q = "select * from buyers where Buyerid = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	//////newly added
-	function getBuyersList1($id){
-	$q = "select * from buyers where ProjectType = '$id'";
-	//$result = mysql_query($q);
-	return $q;
-	}
-	function getPriceList_Min(){
-	$q = "select * from minimum";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getPriceList_Max(){
-	$q = "select * from maximum";
-	$result = mysql_query($q);
-	return $result;
-	}
-	
-	function getSearchCategory(){
-	$q = "select * from search";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getProjectId($id){
-	$q = "select * from projects where Pid = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function del_getProjectId($id){
-	$q = "select * from del_projects where Pid = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getSubscriptionC($id){
-	$q = "select * from subscription where Pid = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getaLLSubscriptionC(){
-	$q = "select * from subscription";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getsubscription($id){
-	$q = "select * from subscription where Pid='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getProjectId1($id){
-	$q = "select * from projects where Pid = '$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function insert_time($id)
-	{
-	$time = time();
-	$q = "insert into time(hfv,verify,active,Pid) values('$time','','','$id')";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getDealinginList(){
-	$q = "SELECT * from dealing";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getPname($id){
-	$q = "SELECT * from gc_properties where rctype='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getPnamepj($id){
-	$q = "SELECT * from gc_projects where rctype='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getGCProperties(){
-	$q = "SELECT * FROM gc_properties";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getGCPropertiesById($type,$id){
-	$q = "SELECT * from gc_properties where rctype='$type' AND Pid='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getGCPropertiesId($id){
-	$q = "SELECT * from gc_properties where Pid='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getGCPropertiesByType($type){
-	$q = "SELECT * from gc_properties where rctype='$type'";
-	}
-	function getGCProjectById($type,$id){
-	$q =  "SELECT * from gc_projects where rctype='$type' AND Pid='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getGCProjectId($id){
-	$q =  "SELECT * from gc_projects where Pid='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function getDealingById($id){
-	$q = "SELECT * FROM dealing where id='$id'";
-	$result = mysql_query($q);
-		while($row = mysql_fetch_array($result)){
-			if($id == $row['Id']){
-				return $row['Dealing'];
-			}
-		}
-	}
-	function insert_time_update($id)
-	{
-	$time = time();
-	$q = "update `time` set `hfv`='$time',`deactive`='' where `Pid`='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function insert_time_verify($id)
-	{
-	$time = time();
-	$q = "update `time` set `verify`='$time',`deactive`='' where `Pid`='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function insert_time_active($id)
-	{
-	$date2=time()+(30*24*60*60);
-	$time = time();
-	$q = "update `time` set `active`='$time',`deactive`='$date2' where `Pid`='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function insert_time_deactive($id)
-	{
-	$time = time();
-	$q = "update `time` set `deactive`='$time' where `Pid`='$id'";
-	$result = mysql_query($q);
-	return $result;
-	}
-	function get_time($id,$id1)
-	{
-	$sql="select * from time where `Pid`='".$id1."'";
-	$result=mysql_query($sql);
-	$row=mysql_fetch_array($result);
-	if($id==0)
-	{
-	$time1=date("d/m/y - h:i A", $row['hfv']+41400);
-	return $time1;
-	}
-	if($id==1)
-	{
-	$time2=date("d/m/y - h:i A", $row['verify']+41400);
-	return $time2;
-	}
-	if($id==2)
-	{
-	$time3=date("d/m/y h:i A", $row['active']+41380);
-	return $time3;
-	}
-	if($id==3)
-	{
-	$time4=date("d/m/y h:i A", $row['deactive']+41400);
-	return $time4;
-	}
-	}
+    function getPriceType(){
+        $q = "select * from pricetype";
+        $result = $this->query($q);
+        return $result;
+    }
+    function getPriceTypeById($id){
+        if($id == 'L'){
+            $val = 'Lakh(s)';
+        }
+        if($id == 'C'){
+            $val == 'Crore(s)';
+        }
+        if($id == 'R'){
+            $val == 'Rs';
+        }
+        return $val;
+    }
+
+    function getBedRooms(){
+        $q = "select * from bedrooms";
+        $result = $this->query($q);
+        return $result;
+    }
+    function getAreaType(){
+        $q = "select * from areatype";
+        $result = $this->query($q);
+        return $result;
+    }
+
+    function getPlanList(){
+        $q = 'select * from plans'; // add here priority wise order if required.
+        $result = $this->query($q);
+        return $result;
+    }
+    function getMonthsList(){
+        $q = 'select * from months';
+        $result = $this->query($q);
+        return $result;
+    }
+    function getMonthsValueById($months){
+        $q = "select * from months where id = '$months'";
+        $result = $this->query($q);
+        $row = mysql_fetch_array($result);
+        return $row['months'];
+    }
+    function getPaymentTypesList(){
+        $q = 'select * from payment_type';
+        $result = $this->query($q);
+        return $result;
+    }
+    function getExpiryDate($months){
+        $expiryMonths = $this->getMonthsValueById($months);
+        $today = time(); // just for calculation purpose
+        $expirydate_time = strtotime('+ $expiryMonths ', $today);
+        return date('d/m/Y-H:i:s', $expirydate_time);
+
+    }
+
+    function addToVerifyHistory($id,$verified){
+        $date = date('d/m/y-H:i:s');
+        $q = "INSERT INTO `verify_history`(`id`, `verify`, `property_id`, `date`) VALUES ('','$verified','$id','$date')";
+        $this->query($q);
+    }
+
 };
 /* Create database connection */
 $database = new MySQLDB;

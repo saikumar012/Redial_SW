@@ -23,21 +23,21 @@ if(!$session->logged_in){
 <body>
 <div id="warp">
 
-<div class="logo"><a href="index_properties.php"><img src="images/logo.png" alt="Redail Logo" /></a></div>
+<div class="logo"><a href="index_properties.html"><img src="images/logo.png" alt="Redail Logo" /></a></div>
 
-<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; <?php echo $_SESSION['username'] ?> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="process.php">Logout</a></span>
+<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; Naresh &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#">Logout</a></span>
 <div class="top_menu">
-<a href="messagehistory.php">S & S History</a>|
-<a href="appointments.php">Appointments</a>|
-<a href="agents/agents_new.php">Bulk</a>|
-<a href="buyers.php" class="active">Buyers</a>|
-<a href="complaintbox.php">Complaints</a>|
-<a href="domods.php">Do-Mod's</a>|
-<a href="msms.php">M-SMS</a>
+<a href="messagehistory.html">S & S History</a>|
+<a href="appointments.html">Appointments</a>|
+<a href="agents/agents_new.html">Bulk</a>|
+<a href="buyers.html" class="active">Buyers</a>|
+<a href="complaintbox.html">Complaints</a>|
+<a href="domods.html">Do-Mod's</a>|
+<a href="msms.html">M-SMS</a>
 </div>
 
 <div class="top_icons" style="float:left; margin:40px 0 0 250px;">
-<a href="properties_add.php"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
+<a href="properties_add.html"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
 </div>
 
 
@@ -69,7 +69,7 @@ if(!$session->logged_in){
 <th scope="col">Buyer ID</th><th scope="col">Name</th><th scope="col">Phone Number</th><th scope="col">Date</th><th scope="col">Search History</th><th scope="col">Sent By</th></tr>
 
 <tr class="CVGridItem"><td>BY 01</td><td>Rajesh</td><td>9705774932</td>
-<td>4-17-2013</td><td><a href="projects_search.php">Search</a></td><td>Naresh</td></tr>
+<td>4-17-2013</td><td><a href="projects_search.html">Search</a></td><td>Naresh</td></tr>
 </tbody>
 </table>
 

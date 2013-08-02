@@ -91,16 +91,16 @@ class Process
       global $session, $form;
       /* Convert username to all lowercase (by option) */
       if(ALL_LOWERCASE){
-         $_POST['username'] = strtolower($_POST['username']);
+         $_POST['uname'] = strtolower($_POST['uname']);
       }
       /* Registration attempt */
-      $retval = $session->register($_POST['division'], $_POST['department'], $_POST['name'], $_POST['mobile'], $_POST['email'], $_POST['EmployeeId'], $_POST['city'], $_POST['whrereincity'], $_POST['zone'], $_POST['username'], $_POST['password']);
+      $retval = $session->register($_POST['uname'], $_POST['password'], $_POST['emailid'], $_POST['empid'], $_POST['phn'], $_POST['active']);
       
       /* Registration Successful */
       if($retval == 0){
          $_SESSION['reguname'] = $_POST['user'];
          $_SESSION['regsuccess'] = true;
-         header("Location: admin/employeelist.php");
+         header("Location: admin/userlist.php");
       }
       /* Error found with form */
       else if($retval == 1){
@@ -176,9 +176,9 @@ class Process
    function procEditAccount(){
       global $session;
       /* Account edit attempt */
-	  echo $_POST['division'].",". $_POST['department'].",".$_POST['name'].",".$_POST['mobile'].",".$_POST['email'].",".$_POST['EmployeeId'].",".$_POST['city'].",".$_POST['whrereincity'].",".$_POST['zone'].",".$_POST['username'].",".$_POST['employeeID'];
+	  echo $_POST['username'].",". $_POST['email'].",". $_POST['employeeid'].",". $_POST['mobile'].",". $_POST['active'].",". $_POST['EmployeeID'];
      	//exit;
-	  $retval = $session->editAccount($_POST['division'], $_POST['department'], $_POST['name'], $_POST['mobile'], $_POST['email'], $_POST['EmployeeId'], $_POST['city'], $_POST['whrereincity'], $_POST['zone'], $_POST['username'], $_POST['employeeID']);
+	  $retval = $session->editAccount($_POST['username'], $_POST['email'], $_POST['employeeid'], $_POST['mobile'], $_POST['active'], $_POST['EmployeeID']);
 
       /* Account edit successful */
       if($retval){

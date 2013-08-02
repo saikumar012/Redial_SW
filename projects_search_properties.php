@@ -23,29 +23,29 @@ if(!$session->logged_in){
 <body>
 <div id="warp">
 
-<div class="logo"><a href="index_properties.php"><img src="images/logo.png" alt="Redail Logo" /></a></div>
+<div class="logo"><a href="index_properties.html"><img src="images/logo.png" alt="Redail Logo" /></a></div>
 
-<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; <?php echo $_SESSION['username'] ?> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="process.php">Logout</a></span>
+<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; Naresh &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#">Logout</a></span>
 <div class="top_menu">
-<a href="messagehistory.php">S & S History</a>|
-<a href="appointments.php">Appointments</a>|
-<a href="agents/agents_new.php">Bulk</a>|
-<a href="buyers.php">Buyers</a>|
-<a href="complaintbox.php">Complaints</a>|
-<a href="domods.php">Do-Mod's</a>|
-<a href="msms.php">M-SMS</a>
+<a href="messagehistory.html">S & S History</a>|
+<a href="appointments.html">Appointments</a>|
+<a href="agents/agents_new.html">Bulk</a>|
+<a href="buyers.html">Buyers</a>|
+<a href="complaintbox.html">Complaints</a>|
+<a href="domods.html">Do-Mod's</a>|
+<a href="msms.html">M-SMS</a>
 </div>
 
 <div class="top_icons" style="float:left; margin:40px 0 0 250px;">
-<a href="properties_add.php"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
+<a href="properties_add.html"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
 </div>
 
 <!--<div class="connect_people">Connecting properties & people in one dial <br />
 <a href="#">040 - 22222224</a></div>-->
 
 <ul id="nav-reflection2">
-<li><a href="index_properties.php">Properties</a></li>
-<li class="button-color-1"><a href="index_projects.php" class="active">Projects</a></li>		
+<li><a href="index_properties.html">Properties</a></li>
+<li class="button-color-1"><a href="index_projects.html" class="active">Projects</a></li>		
 </ul>
 
 <div style="width:100%; float:left;">
@@ -226,8 +226,8 @@ To <input type="text" class="input_box input_box2" value="Area Max" onfocus="if(
 <div class="div contactno">9705774932</div>
 </div>
 
-<a href="projects_add2.php"><img src="images/pr_add.png" style=" position:absolute; bottom:-25px; right:70px;" /></a>
-<a href="projects_search_properties.php"><img src="images/pr_view.png" style=" position:absolute; bottom:-25px; right:20px;" /></a>
+<a href="projects_add2.html"><img src="images/pr_add.png" style=" position:absolute; bottom:-25px; right:70px;" /></a>
+<a href="projects_search_properties.html"><img src="images/pr_view.png" style=" position:absolute; bottom:-25px; right:20px;" /></a>
 
 </div>
 
@@ -360,7 +360,7 @@ To <input type="text" class="input_box input_box2" value="Area Max" onfocus="if(
 <a href="#" class="numbers">Next</a>
 </div>
 
-<div style="margin:15px 28px 0 0; float:right;"><a href="projects_search_result.php"><input type="submit" value="Go" class="search_btn" name="Go"/></a></div>
+<div style="margin:15px 28px 0 0; float:right;"><a href="projects_search_result.html"><input type="submit" value="Go" class="search_btn" name="Go"/></a></div>
 <p style="float:right; font-size:13px; margin-top:16px;">&nbsp; <input type="checkbox" /> 8 PR &nbsp;&nbsp; <input type="checkbox" />12 PR &nbsp;</p>
 
 <!--<div id="form">

@@ -5,6 +5,7 @@ if(!$session->logged_in){
 		header("Location:index.php");
 }else{
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,21 +23,21 @@ if(!$session->logged_in){
 <body>
 <div id="warp">
 
-<div class="logo"><a href="index_properties.php"><img src="images/logo.png" alt="Redail Logo" /></a></div>
+<div class="logo"><a href="index_properties.html"><img src="images/logo.png" alt="Redail Logo" /></a></div>
 
-<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; <?php echo $_SESSION['username'] ?> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="process.php">Logout</a></span>
+<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; Naresh &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#">Logout</a></span>
 <div class="top_menu">
-<a href="messagehistory.php">S & S History</a>|
-<a href="appointments.php" class="active">Appointments</a>|
-<a href="agents/agents_new.php">Bulk</a>|
-<a href="buyers.php">Buyers</a>|
-<a href="complaintbox.php">Complaints</a>|
-<a href="domods.php">Do-Mod's</a>|
-<a href="msms.php">M-SMS</a>
+<a href="messagehistory.html">S & S History</a>|
+<a href="appointments.html" class="active">Appointments</a>|
+<a href="agents/agents_new.html">Bulk</a>|
+<a href="buyers.html">Buyers</a>|
+<a href="complaintbox.html">Complaints</a>|
+<a href="domods.html">Do-Mod's</a>|
+<a href="msms.html">M-SMS</a>
 </div>
 
 <div class="top_icons" style="float:left; margin:40px 0 0 250px;">
-<a href="properties_add.php"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
+<a href="properties_add.html"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
 </div>
 
 
@@ -640,6 +641,7 @@ De active(paid) -  05/03/12 - 10:00 AM
 <script src="js/chosen.jquery.js" type="text/javascript"></script>
 <script type="text/javascript"> $(".chzn-select").chosen(); $(".chzn-select-deselect").chosen({allow_single_deselect:true}); </script>
 </body>
+</html>
 <?php
 }
 ?>

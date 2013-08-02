@@ -83,7 +83,7 @@ $(document).ready(function() {
 <ol>
 <li class="forgot" style="float:left;">Password Sent to be Your Enail id.</li><br />
 <li><input type="text" name="Fristname" class="input" onfocus="if(this.value =='User name' ) this.value=''" onblur="if(this.value=='') this.value='User name'" value="User name" /></li>
-<li class="buttons" style="float:right;"><a href="index.php"><input  type="submit" value="SUBMIT" class="login_btn"/></a></li>
+<li class="buttons" style="float:right;"><a href="index.html"><input  type="submit" value="SUBMIT" class="login_btn"/></a></li>
 
 </ol>
 </div>

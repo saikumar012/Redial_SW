@@ -1,5 +1,5 @@
 <?php
-//error_reporting('all');
+error_reporting(0);
 /**
  * Session.php
  * 
@@ -13,6 +13,7 @@ include("mailer.php");
 include("message.php");
 include("excell.php");
 //include("expirelist.php");
+date_default_timezone_set('Asia/Kolkata');
 class Session
 {
    var $username;     //Username given on sign-up
@@ -214,10 +215,10 @@ class Session
     * 1. If no errors were found, it registers the new user and
     * returns 0. Returns 2 if registration failed.
     */
-   function register($subdivision, $subdepartment, $subname, $submobile, $subemail, $subempid, $subcity, $subwhrereincity, $subzone, $subusername, $subpassword){
+   function register($subuser, $subpass, $subemail, $subempid, $submobile, $subactive){
       global $database, $form, $mailer;  //The database, form and mailer object
       
-         if($database->addNewUser($subdivision, $subdepartment, $subname, $submobile, $subemail, $subempid, $subcity, $subwhrereincity, $subzone, $subusername, md5($subpassword))){
+         if($database->addNewUser($subuser, md5($subpass), $subemail, $subempid, $submobile, $subactive)){
             if(EMAIL_WELCOME){
                $mailer->sendWelcome($subuser,$subemail,$subpass);
             }
@@ -235,10 +236,10 @@ class Session
     * format, the change is made. All other fields are changed
     * automatically.
     */
-   function editAccount($subdivision, $subdepartment, $subname, $mobile, $subemail, $subempid, $subcity, $subwhrereincity, $subzone, $subusername, $suborempid){
+   function editAccount($subusername, $subemail, $subempid, $mobile, $active ,$orempid){
       global $database;  //The database and form object
-	  echo $subdivision.",".$subdepartment.",".$subname.",".$subname.",".$mobile.",".$subemail.",".$subempid.",".$subcity.",".$subwhrereincity.",".$subzone.",".$subusername.",".$suborempid;
-         $database->updateUserField($subdivision, $subdepartment, $subname, $mobile, $subemail, $subempid, $subcity, $subwhrereincity, $subzone, $subusername, $suborempid);
+	  echo $subusername.",". $subemail.",". $subempid.",". $mobile.",". $active.",". $orempid;
+         $database->updateUserField($subusername, $subemail, $subempid, $mobile, $active, $orempid);
       
       /* Success! */
       return true;

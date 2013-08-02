@@ -23,21 +23,21 @@ if(!$session->logged_in){
 <body>
 <div id="warp">
 
-<div class="logo"><a href="index_properties.php"><img src="images/logo.png" alt="Redail Logo" /></a></div>
+<div class="logo"><a href="index_properties.html"><img src="images/logo.png" alt="Redail Logo" /></a></div>
 
-<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; <?php echo $_SESSION['username'] ?> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="process.php">Logout</a></span>
+<span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; Naresh &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#">Logout</a></span>
 <div class="top_menu">
-<a href="messagehistory.php" class="active">S & S History</a>|
-<a href="appointments.php">Appointments</a>|
-<a href="agents/agents_new.php">Bulk</a>|
-<a href="buyers.php">Buyers</a>|
-<a href="complaintbox.php">Complaints</a>|
-<a href="domods.php">Do-Mod's</a>|
-<a href="msms.php">M-SMS</a>
+<a href="messagehistory.html" class="active">S & S History</a>|
+<a href="appointments.html">Appointments</a>|
+<a href="agents/agents_new.html">Bulk</a>|
+<a href="buyers.html">Buyers</a>|
+<a href="complaintbox.html">Complaints</a>|
+<a href="domods.html">Do-Mod's</a>|
+<a href="msms.html">M-SMS</a>
 </div>
 
 <div class="top_icons" style="float:left; margin:40px 0 0 250px;">
-<a href="properties_add.php"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
+<a href="properties_add.html"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
 </div>
 
 
@@ -81,13 +81,13 @@ if(!$session->logged_in){
 <tbody>
 <tr class="CVGridHeader">
 <th scope="col">S.NO</th><th scope="col">ID</th><th scope="col">Name</th><th scope="col">Phone No</th><th scope="col">Date</th><th scope="col">SMS LIST</th><th>Search History</th><th scope="col">Sent By</th></tr>
-<tr class="CVGridAltItem"><td>1.</td><td>RE 01</td><td>Naresh</td><td>9705774932</td><td>12-4-2012</td><td><a href="#view">Message</a></td><td><a href="properties_search.php">Search History</a></td><td>Rajesh</td></tr>
+<tr class="CVGridAltItem"><td>1.</td><td>RE 01</td><td>Naresh</td><td>9705774932</td><td>12-4-2012</td><td><a href="#view">Message</a></td><td><a href="properties_search.html">Search History</a></td><td>Rajesh</td></tr>
 
-<tr class="CVGridAltItem"><td>2.</td><td>RE 01</td><td>Naresh</td><td>9866404000</td><td>12-4-2012</td><td><a href="#view">Message</a></td><td><a href="properties_search.php">Search History</a></td><td>Rajesh</td></tr>
+<tr class="CVGridAltItem"><td>2.</td><td>RE 01</td><td>Naresh</td><td>9866404000</td><td>12-4-2012</td><td><a href="#view">Message</a></td><td><a href="properties_search.html">Search History</a></td><td>Rajesh</td></tr>
 
-<tr class="CVGridAltItem"><td>3.</td><td>RE 01</td><td>Naresh</td><td>8885252124</td><td>12-4-2012</td><td><a href="#view">Message</a></td><td><a href="properties_search.php">Search History</a></td><td>Rajesh</td></tr>
+<tr class="CVGridAltItem"><td>3.</td><td>RE 01</td><td>Naresh</td><td>8885252124</td><td>12-4-2012</td><td><a href="#view">Message</a></td><td><a href="properties_search.html">Search History</a></td><td>Rajesh</td></tr>
 
-<tr class="CVGridAltItem"><td>4.</td><td>RE 01</td><td>Naresh</td><td>9705774932</td><td>12-4-2012</td><td><a href="#view">Message</a></td><td><a href="properties_search.php">Search History</a></td><td>Rajesh</td></tr>
+<tr class="CVGridAltItem"><td>4.</td><td>RE 01</td><td>Naresh</td><td>9705774932</td><td>12-4-2012</td><td><a href="#view">Message</a></td><td><a href="properties_search.html">Search History</a></td><td>Rajesh</td></tr>
 
 </tbody></table>
 
@@ -118,7 +118,7 @@ For more details dial 040-22222224
 </ol>
 <div id="form">
 <ol>
-<p><li class="buttons" style="float:right; margin:0 0 20px 20px;"><input type="submit" class="input_btn" value="Resend" /> <a href="properties_search_result.php"><input type="submit" class="input_btn" value="Forward" /></a></li></ol></p>
+<p><li class="buttons" style="float:right; margin:0 0 20px 20px;"><input type="submit" class="input_btn" value="Resend" /> <a href="properties_search_result.html"><input type="submit" class="input_btn" value="Forward" /></a></li></ol></p>
 </ol>
 </div>
 
