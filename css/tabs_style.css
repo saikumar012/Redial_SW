@@ -1,0 +1,50 @@
+
+
+ul.graphic_tabs {
+float:left; width:600px; padding:0px; margin:0 0 0 10px; list-style:none; /*position:fixed;*/ }
+ul.graphic_tabs li {
+	margin: 0;	overflow: hidden;
+	position: relative; margin:0 15px 0 0;
+	float:left;
+}
+ul.graphic_tabs li a {
+	text-decoration: none; /*width:47px;*/ height:77px;
+	display: block;	outline: none; font-size:13px;
+	
+}
+
+/*ul.graphic_tabs li.active, html ul.graphic_tabs li.active a:hover  {
+	background:url(../images/arro.png) no-repeat center;
+}
+*/
+ul.graphic_tabs li a .graph_icon1{ background:url(../images/graphicicons/icon_1.png) top center no-repeat; height:32px; padding:45px 0 0 0; color:#000;}
+ul.graphic_tabs li a:hover .graph_icon1{ background:url(../images/graphicicons/iconactive_1.png) top center no-repeat; color:#e11f27;}
+ul.graphic_tabs li.active .graph_icon1{background:url(../images/graphicicons/iconactive_1.png) top center no-repeat;  color: #e11f27;}
+
+ul.graphic_tabs li a .graph_icon2{ background:url(../images/graphicicons/icon_2.png) top center no-repeat; height:32px; padding:45px 0 0 0; color:#000;}
+ul.graphic_tabs li a:hover .graph_icon2{ background:url(../images/graphicicons/iconactive_2.png) top center no-repeat; color:#e11f27;}
+ul.graphic_tabs li.active .graph_icon2{background:url(../images/graphicicons/iconactive_2.png) top center no-repeat; color: #e11f27;}
+
+ul.graphic_tabs li a .graph_icon3{ background:url(../images/graphicicons/icon_3.png) top center no-repeat; height:32px; padding:45px 0 0 0; color:#000;}
+ul.graphic_tabs li a:hover .graph_icon3{ background:url(../images/graphicicons/iconactive_3.png) top center no-repeat; color:#e11f27;}
+ul.graphic_tabs li.active .graph_icon3{background:url(../images/graphicicons/iconactive_3.png) top center no-repeat; color: #e11f27;}
+
+
+
+ul.graphic_tabs li a span{ padding:0px; float:left;}
+ul.graphic_tabs li a:hover {
+/*background:url(../images/arrowbaar_o.png) no-repeat;*/
+}	
+html ul.graphic_tabs li.active, html ul.graphic_tabs li.active a:hover  {
+	background:url(../images/arro.png) no-repeat bottom center; z-index:99;
+	color: #000;
+}
+.graphictab_container {
+	border-top: none;
+	clear: both;
+	float: left; 
+	width: 100%;
+}
+.graphictab_content { padding:0px; margin:-1px 0 0 0; width:562px; float:left; border-radius: 5px; position:relative; behavior: url(PIE.htc);}
+
+.graphictab_content2 { padding:20px 30px 0 30px; margin:0 0 10px 0px; width:500px; min-height:40px; border:1px solid #b7b7b7; vertical-align:top; border-radius: 5px; position:relative; behavior: url(PIE.htc);}

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome to Redial</title>
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+<link rel="stylesheet" href="../css/chosen2.css" />
+<script src="../js/jquery-1.8.0.min.js"></script>
+
+<link href="../css/modal.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+<div id="warp">
+
+<div class="logo"><a href="home.html"><img src="../images/logo.png" alt="Redail Logo" /></a></div>
+
+<span style="float:right; font-size:11px; padding-top:3px; width:700px; text-align:right;">&nbsp;&nbsp;&nbsp; Admin &nbsp;&nbsp;|&nbsp;&nbsp; <a href="changeps.html">Change Password</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#">Logout</a></span>
+
+<div class="r_menu2"><a href="owners.html" class="active">Owners</a><a href="agents.html">Agents</a><a href="builders.html">Builders</a></div>
+
+<div style="width:100%; float:left;">
+
+<div class="main_hed2"><img src="../images/p_sicon.png" align="absmiddle" /> &nbsp; Owners Bulk > <span>View Sets list</span></div>
+
+<div id="form">
+<ol>
+<p><li><label>Status</label><select data-placeholder="Select Status" class="chzn-select" tabindex="2" style="width:315px;">
+          <option value=""></option>
+           <option>Hold</option>
+          <option>Verify</option>
+          <option>Active</option>
+          <option>Deactive</option>
+</select></li></p>
+<p><li><label>Employee Name</label>
+<select data-placeholder="Employee Name" class="chzn-select" tabindex="2" style="width:315px;">
+          <option value=""></option> 
+          <option value="2">Name</option> 
+          <option value="2">Name</option> 
+          <option value="2">Name</option> 
+          <option value="2">Name</option>
+</select></li></p>
+
+<p><li><label>Date </label><input class="input2"  value="Form Date" onfocus="if(this.value =='Form Date' ) this.value=''" onblur="if(this.value=='') this.value='Form Date'"/> To 
+<input class="input2" value="To Date" onfocus="if(this.value =='To Date' ) this.value=''" onblur="if(this.value=='') this.value='To Date'" /></li></p>
+
+<li class="buttons" style="float:right;"><a href="#"><input  type="submit" value="SEARCH" class="input_btn"/></a></li>
+</ol>
+</div>
+
+
+<div style="width:100%;" id="form">
+<ol>
+<li class="buttons" style="float:right; margin:0px;"><a href="owners_set_assignjob.html"><input  type="submit" value="Assign Job" class="input_btn"/></a> <input  type="submit" value="Delete" class="input_btn"/></li>
+</ol>
+</div>
+
+<table class="CVGridView" rules="all" border="1" cellspacing="0" style="margin:; float:left; width:100%">
+<tbody>
+<tr class="CVGridHeader">
+<th scope="col">Set No</th><th scope="col">Date</th><th scope="col">Total Pr & Pj</th><th scope="col">Total Amount</th><th scope="col">Status</th><th scope="col">Verification</th><th scope="col">Payment type</th><th scope="col">Payment Status</th><th scope="col">Assign job to exe</th><th scope="col">Added by</th><th scope="col">View set</th><th scope="col">Modify</th><th scope="col">Delete</th><th scope="col">Check all <input type="checkbox" /></th></tr>
+<tr class="CVGridItem"><td>01</td><td>10-06-2013</td><td>40</td><td>40000</td><td>Active</td><td>Verified</td><td>Cash</td><td>Paid</td><td>EMP 01</td><td>Naresh</td><td><a href="owners_set2.html">View set</a></td><td><a class="inline" href="#edit">Modify</a></td><td><a href="#"><img src="../images/close.png" /></a></td><td><input type="checkbox" /></td></tr>
+<tr class="CVGridItem"><td>02</td><td>10-06-2013</td><td>40</td><td>40000</td><td>Active</td><td>Verified</td><td>Cash</td><td>Paid</td><td>EMP 01</td><td>Naresh</td><td><a href="owners_set2.html">View set</a></td><td><a class="inline" href="#edit">Modify</a></td><td><a href="#"><img src="../images/close.png" /></a></td><td><input type="checkbox" /></td></tr>
+<tr class="CVGridItem"><td>03</td><td>10-06-2013</td><td>40</td><td>40000</td><td>Active</td><td>Verified</td><td>Cash</td><td>Paid</td><td>EMP 01</td><td>Naresh</td><td><a href="owners_set2.html">View set</a></td><td><a class="inline" href="#edit">Modify</a></td><td><a href="#"><img src="../images/close.png" /></a></td><td><input type="checkbox" /></td></tr>
+</tbody></table>
+
+
+</div>
+
+</div>
+
+<a href="#x" class="overlay" id="edit"></a>
+        <div class="popup" style="padding:10px 20px;">
+<table class="CVGridView" rules="all" border="1" cellspacing="0" style="margin:; float:left; width:100%">
+
+<tbody>
+<!--<tr class="CVGridHeader"><th colspan="6"><li style="float:left; list-style:none;">Total no. of Properties:&nbsp;  <a href="owners_set_properites.html" style="color:#e4373e;">150</a></li> <li style="float:right; list-style:none;">Total no. of Projects:&nbsp; <a href="#" style="color:#e4373e;"><strong>150</strong></a></li></th></tr>-->
+<tr class="CVGridHeader">
+<th scope="col">Type</th><th scope="col">1 month</th><th scope="col">2 Months</th><th scope="col">Qtr</th><th scope="col">Half yr</th><th scope="col">Year</th><th scope="col">Total no .of Properties</th><th scope="col">Total Amount</th><th scope="col">Customized Amount</th></tr>
+<tr class="CVGridItem"><td><strong>Properties</strong></td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>50</td><td>5000</td><td>4000</td></tr>
+<tr class="CVGridItem"><td><strong>Projects</strong></td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>50</td><td>5000</td><td>4000</td></tr>
+
+<tr>
+<td style="text-align:left;" colspan="9">
+
+
+
+<div id="form" style="float:left;">
+<ol>
+<p><li><label>Free</label><input type="text" class="input2" /></li></p>
+<p><li><label>Total amount</label><input type="text" class="input2" /> <input type="checkbox" /> Customized </li></p>
+
+<p><li><label>Customized amount</label><input type="text" class="input2" /> <select data-placeholder="Select" class="chzn-select" style="width:80px;">
+          <option value=""></option> 
+          <option value="">Rs</option> 
+          <option value="2">Lakh(s)</option>
+          <option value="">Cr(s)</option>
+        </select></li></p>
+
+<p><li><label>Referred by</label><input type="text" class="input2" style="margin-top:0px;" /> </li></p>
+
+<p><li><label>Payment Type</label><select data-placeholder="Payment Type" class="chzn-select" tabindex="2" style="width:145px;">
+<option value=""></option>
+<option value="C"  >Cash</option>
+<option value="BT" >Bank Transfer</option>
+<option value="CH" >Cheque</option>
+<option value="D" >Deposit</option>
+</select>  <input type="checkbox" /> Paid &nbsp; <input type="checkbox" /> Verified</li></p>
+<p><li><label>Assign job to Exe</label><select data-placeholder="Executives" class="chzn-select" tabindex="2" style="width:150px;">
+<option value=""></option> 
+<option value="2">EMP 01</option> 
+<option value="2">EMP 02</option>
+</select></li></p>
+
+
+<!--<p><li class="buttons" style="float:right;"><a href="#"><input  type="submit" value="UPDATE" class="input_btn"/></a></li></p>-->
+
+</ol>
+</div>
+
+<div id="form" style="float:right;">
+<ol>
+<h4>Payment details</h4>
+<p><li><label>Amount received</label><input type="checkbox" /></li></p>
+<p><li><label>Amount paid</label><input type="text" class="input2" /> <select data-placeholder="Select" class="chzn-select" style="width:80px;">
+          <option value=""></option> 
+          <option value="">Rs</option> 
+          <option value="2">Lakh(s)</option>
+          <option value="">Cr(s)</option>
+        </select></li></p>
+
+<p><li><label>Amount Paid Through</label><select data-placeholder="Amount Paid Through" class="chzn-select" tabindex="2" style="width:145px;">
+          <option value=""></option>
+           <option value="C"  >Cash</option>
+<option value="BT" >Bank Transfer</option>
+<option value="CH" >Cheque</option>
+<option value="D" >Deposit</option>
+        </select></li></p>
+
+<p><li><label>Transaction
+reference No</label><input type="text" class="input2" style="margin-top:0px;" /></li></p>
+
+<p><li class="buttons" style="float:right;"><input  type="submit" value="UPDATE" class="input_btn"/></li></p>
+
+</ol>
+</div>
+</td>
+</tr>
+
+
+</tbody></table>
+<a class="close" href="#close"></a>
+        </div>
+
+
+<script src="../js/chosen.jquery.js" type="text/javascript"></script>
+<script type="text/javascript"> $(".chzn-select").chosen(); $(".chzn-select-deselect").chosen({allow_single_deselect:true}); </script>
+</body>
+</html>

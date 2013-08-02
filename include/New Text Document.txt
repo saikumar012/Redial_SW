@@ -1,0 +1,51 @@
+ <?php 
+ $Type=$row['Type'];
+ $typedata = $database->getPropertyList_search($Type);
+while($row1 = mysql_fetch_array($typedata)){
+?>
+    <div class="div propertytype"><?php echo $row1['type'] ?></div>
+    <?php 
+	break;
+}
+?>
+<?php 
+ $City=$row['City'];
+ echo $City;
+$citydata = $database->getCityList_search($City);
+while($row2 = mysql_fetch_array($citydata)){
+?>
+    <div class="div area"><?php echo $row2['city'] ?></div>
+    <?php 
+	break;
+}
+?>
+</div>
+<div style="float:left;">
+<?php 
+ $City=$row['City'];
+$citydata = $database->getCityList_search($City);
+while($row3 = mysql_fetch_array($citydata)){
+?>
+    <div class="div area"><?php echo $row3['city'] ?></div>
+    <?php 
+	break;
+}
+?>
+<?php 
+$Location=$row['Location'];
+$citydata = $location=$database->getlocation_search($Location);
+while($row4 = mysql_fetch_array($citydata)){
+?>
+    <div class="div area"><?php echo $row4['location'] ?></div>
+    <?php 
+	break;
+}
+?>
+<div style="float:left;">
+<div class="div contactno">9705774932</div>
+</div>
+</div>
+<?php
+  }
+  }
+?>
