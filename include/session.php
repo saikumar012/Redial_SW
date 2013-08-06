@@ -215,12 +215,12 @@ class Session
     * 1. If no errors were found, it registers the new user and
     * returns 0. Returns 2 if registration failed.
     */
-   function register($subuser, $subpass, $subemail, $subempid, $submobile, $subactive){
+   function register($subdivision, $subdepartment, $subname, $submobile, $subemail, $subempid, $subcity, $subwhrereincity, $subzone, $subusername, $subpassword){
       global $database, $form, $mailer;  //The database, form and mailer object
       
-         if($database->addNewUser($subuser, md5($subpass), $subemail, $subempid, $submobile, $subactive)){
+         if($database->addNewUser($subdivision, $subdepartment, $subname, $submobile, $subemail, $subempid, $subcity, $subwhrereincity, $subzone, $subusername, md5($subpassword))){
             if(EMAIL_WELCOME){
-               $mailer->sendWelcome($subuser,$subemail,$subpass);
+              // $mailer->sendWelcome($subuser,$subemail,$subpass);
             }
             return 0;  //New user added succesfully
 		}else{
@@ -236,10 +236,10 @@ class Session
     * format, the change is made. All other fields are changed
     * automatically.
     */
-   function editAccount($subusername, $subemail, $subempid, $mobile, $active ,$orempid){
+   function editAccount($subdivision, $subdepartment, $subname, $mobile, $subemail, $subempid, $subcity, $subwhrereincity, $subzone, $subusername, $suborempid){
       global $database;  //The database and form object
-	  echo $subusername.",". $subemail.",". $subempid.",". $mobile.",". $active.",". $orempid;
-         $database->updateUserField($subusername, $subemail, $subempid, $mobile, $active, $orempid);
+	  echo $subdivision.",".$subdepartment.",".$subname.",".$subname.",".$mobile.",".$subemail.",".$subempid.",".$subcity.",".$subwhrereincity.",".$subzone.",".$subusername.",".$suborempid;
+         $database->updateUserField($subdivision, $subdepartment, $subname, $mobile, $subemail, $subempid, $subcity, $subwhrereincity, $subzone, $subusername, $suborempid);
       
       /* Success! */
       return true;
