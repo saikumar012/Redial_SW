@@ -36,160 +36,74 @@ if(!$session->logged_in){
 <body>
 <div id="warp">
 
-<div class="logo"><a href="index_properties.html"><img src="images/logo.png" alt="Redail Logo" /></a></div>
+<div class="logo"><a href="index_properties.php"><img src="images/logo.png" alt="Redail Logo" /></a></div>
 
 <span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; Naresh &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#">Logout</a></span>
 <div class="top_menu">
-<a href="messagehistory.html">S & S History</a>|
-<a href="appointments.html">Appointments</a>|
-<a href="agents/agents_new.html">Bulk</a>|
-<a href="buyers.html">Buyers</a>|
-<a href="complaintbox.html">Complaints</a>|
-<a href="domods.html">Do-Mod's</a>|
-<a href="msms.html">M-SMS</a>
+<a href="messagehistory.php">S & S History</a>|
+<a href="appointments.php">Appointments</a>|
+<a href="agents/agents_new.php">Bulk</a>|
+<a href="buyers.php">Buyers</a>|
+<a href="complaintbox.php">Complaints</a>|
+<a href="domods.php">Do-Mod's</a>|
+<a href="msms.php">M-SMS</a>
 </div>
 
 <div class="top_icons" style="float:left; margin:40px 0 0 250px;">
-<a href="properties_add.html" class="active"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
+<a href="properties_add.php" class="active"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
 </div>
 
 <!--<div class="connect_people">Connecting properties & people in one dial <br />
 <a href="#">040 - 22222224</a></div>-->
 
 <ul id="nav-reflection2">
-<li><a href="properties_add.html">Properties</a></li>
-<li class="button-color-1"><a href="projects_add.html" class="active">Projects</a></li>		
+<li><a href="properties_add.php">Properties</a></li>
+<li class="button-color-1"><a href="projects_add.php" class="active">Projects</a></li>		
 </ul>
 
 <div style="width:100%; float:left;">
 
-<div class="main_hed" style="margin-top:9px;">List property > Projects > Commercial > <span>Projects List</span> <div class="inner_menu"><a href="projects_add.html">Residential</a>|<a href="projects_add_comm.html" class="active">Commercial</a>|<a href="projects_add_ag.html" style="padding-right:0px;">Agriculture</a>
+<div class="main_hed" style="margin-top:9px;">List property > Projects > Commercial > <span>Projects List</span> <div class="inner_menu"><a href="projects_add.php">Residential</a>|<a href="projects_add_comm.php" class="active">Commercial</a>|<a href="projects_add_ag.php" style="padding-right:0px;">Agriculture</a>
 </div></div>
 
 
-<div class="left_body">
+    <div class="left_body">
+    <?php
+    $project_list=$database->getproject_list(2);
+    while($row=mysql_fetch_array($project_list))
+    {
+        ?>
+        <div class="search_results" style="margin-bottom:25px;">
+            <div style="position:absolute; right:0"><input type="checkbox" /></div>
+            <div class="div star">***</div>
+            <div class="div userid"><?php echo $row['project_id']; ?></div>
+            <a href="#history"><div class="div more">History</div></a>
+            <a href="#edit"><div class="div more">more</div></a>
+            <img src="images/icon_1.png" align="left" style="margin:5px 0 0 10px;" />
+            <img src="images/icon_2.png" align="left" style="margin:5px 0 0 10px;" />
+            <img src="images/icon_3.png" align="left" style="margin:5px 0 0 10px;" />
+            <img src="images/icon_4.png" align="left" style="margin:5px 0 0 10px;" />
+            <img src="images/icon_5.png" align="left" style="margin:5px 0 0 10px;" />
+            <br /><br />
+            <div class="div requirment"><?php echo $row['description'] ?></div>
+            <div style="float:left;">
+                <div class="div propertytype"><?php echo $ptype=$database->getpropertyyvariable($row['property_type']); ?></div>
 
-<div class="search_results" style="margin-bottom:25px;">
-<div style="position:absolute; right:0"><input type="checkbox" /></div>
-<div class="div star">***</div>
-<div class="div userid">RE 01</div>
-<a href="#history"><div class="div more">History</div></a>
-<a href="#edit"><div class="div more">more</div></a>
-<!--<img src="images/rd.png" align="left" style="margin:5px 0 0 10px;" />-->
-<img src="images/icon_1.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_2.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_3.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_4.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_5.png" align="left" style="margin:5px 0 0 10px;" />
-<br /><br />
-<div class="div requirment">3 BHK, Konark Towers, Dilsukhnagr, Hyderabad 500 060.</div>
-<div style="float:left;">
-<div class="div propertytype">Independent house</div>
-<div class="div area">Sell</div>
-</div>
-<div style="float:left;">
-<div class="div city">Hyderabad</div>
-<div class="div whareincity">Dilsukhnagar</div>
-</div>
-<div style="float:left;">
-<div class="div price">Naresh</div>
-<div class="div contactno">9705774932</div>
-</div>
+                <div class="div area"><?php if($row['want']==1){echo "Sell";}else{echo "Rent";} ?></div>
+            </div>
+            <div style="float:left;">
+                <div class="div city"><?php echo $citylist=$database->getCitybyvariable($row['city']); ?></div>
+                <div class="div whareincity"><?php echo $locationname=$database->getLoationbyvariable($row['location']); ?></div>
+            </div>
+            <div style="float:left;">
+                <div class="div price"><?php echo $row['name']; ?></div>
+                <div class="div contactno"><?php echo $row['mobile']; ?></div>
+            </div>
 
-<a href="projects_add2_comm.html"><img src="images/pr_add.png" style=" position:absolute; bottom:-25px; right:70px;" /></a>
-<a href="projects_addpost2_comm.html"><img src="images/pr_view.png" style=" position:absolute; bottom:-25px; right:20px;" /></a>
+<a href="projects_add2_comm.php?projectid=<?php echo $row['project_id']; ?>"><img src="images/pr_add.png" style=" position:absolute; bottom:-25px; right:70px;" /></a>
+<a href="projects_addpost2_comm.php?projectid=<?php echo $row['project_id']; ?>"><img src="images/pr_view.png" style=" position:absolute; bottom:-25px; right:20px;" /></a>
 </div>
-<div class="search_results" style="margin-bottom:25px;">
-<div style="position:absolute; right:0"><input type="checkbox" /></div>
-<div class="div star">***</div>
-<div class="div userid">RE 01</div>
-<a href="#history"><div class="div more">History</div></a>
-<a href="#edit"><div class="div more">more</div></a>
-<!--<img src="images/rd.png" align="left" style="margin:5px 0 0 10px;" />-->
-<img src="images/icon_1.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_2.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_3.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_4.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_5.png" align="left" style="margin:5px 0 0 10px;" />
-<br /><br />
-<div class="div requirment">3 BHK, Konark Towers, Dilsukhnagr, Hyderabad 500 060.</div>
-<div style="float:left;">
-<div class="div propertytype">Independent house</div>
-<div class="div area">Sell</div>
-</div>
-<div style="float:left;">
-<div class="div city">Hyderabad</div>
-<div class="div whareincity">Dilsukhnagar</div>
-</div>
-<div style="float:left;">
-<div class="div price">Naresh</div>
-<div class="div contactno">9705774932</div>
-</div>
-
-<a href="projects_add2_comm.html"><img src="images/pr_add.png" style=" position:absolute; bottom:-25px; right:70px;" /></a>
-<a href="projects_addpost2_comm.html"><img src="images/pr_view.png" style=" position:absolute; bottom:-25px; right:20px;" /></a>
-</div>
-<div class="search_results" style="margin-bottom:25px;">
-<div style="position:absolute; right:0"><input type="checkbox" /></div>
-<div class="div star">***</div>
-<div class="div userid">RE 01</div>
-<a href="#history"><div class="div more">History</div></a>
-<a href="#edit"><div class="div more">more</div></a>
-<!--<img src="images/rd.png" align="left" style="margin:5px 0 0 10px;" />-->
-<img src="images/icon_1.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_2.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_3.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_4.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_5.png" align="left" style="margin:5px 0 0 10px;" />
-<br /><br />
-<div class="div requirment">3 BHK, Konark Towers, Dilsukhnagr, Hyderabad 500 060.</div>
-<div style="float:left;">
-<div class="div propertytype">Independent house</div>
-<div class="div area">Sell</div>
-</div>
-<div style="float:left;">
-<div class="div city">Hyderabad</div>
-<div class="div whareincity">Dilsukhnagar</div>
-</div>
-<div style="float:left;">
-<div class="div price">Naresh</div>
-<div class="div contactno">9705774932</div>
-</div>
-
-<a href="projects_add2_comm.html"><img src="images/pr_add.png" style=" position:absolute; bottom:-25px; right:70px;" /></a>
-<a href="projects_addpost2_comm.html"><img src="images/pr_view.png" style=" position:absolute; bottom:-25px; right:20px;" /></a>
-</div>
-<div class="search_results" style="margin-bottom:25px;">
-<div style="position:absolute; right:0"><input type="checkbox" /></div>
-<div class="div star">***</div>
-<div class="div userid">RE 01</div>
-<a href="#history"><div class="div more">History</div></a>
-<a href="#edit"><div class="div more">more</div></a>
-<!--<img src="images/rd.png" align="left" style="margin:5px 0 0 10px;" />-->
-<img src="images/icon_1.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_2.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_3.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_4.png" align="left" style="margin:5px 0 0 10px;" />
-<img src="images/icon_5.png" align="left" style="margin:5px 0 0 10px;" />
-<br /><br />
-<div class="div requirment">3 BHK, Konark Towers, Dilsukhnagr, Hyderabad 500 060.</div>
-<div style="float:left;">
-<div class="div propertytype">Independent house</div>
-<div class="div area">Sell</div>
-</div>
-<div style="float:left;">
-<div class="div city">Hyderabad</div>
-<div class="div whareincity">Dilsukhnagar</div>
-</div>
-<div style="float:left;">
-<div class="div price">Naresh</div>
-<div class="div contactno">9705774932</div>
-</div>
-
-<a href="projects_add2_comm.html"><img src="images/pr_add.png" style=" position:absolute; bottom:-25px; right:70px;" /></a>
-<a href="projects_addpost2_comm.html"><img src="images/pr_view.png" style=" position:absolute; bottom:-25px; right:20px;" /></a>
-</div>
-
+        <?php } ?>
 <div class="pagination" style="float:left;">
 <a href="#" class="numbers">Prev</a>
 <a href="#" class="numbers active">1</a>

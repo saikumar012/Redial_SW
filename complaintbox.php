@@ -4,7 +4,24 @@ include("include/session.php");
 if(!$session->logged_in){
 		header("Location:index.php");
 }else{
-?>
+
+    if(isset($_POST['submit'])) {
+        $From = $_POST['From'];
+        $Name = $_POST['Name'];
+        $Phone = $_POST['Phone'];
+        $Email = $_POST['Email'];
+        $City = $_POST['City'];
+        $wrincity = $_POST['wrincity'];
+        $About = $_POST['About'];
+        $ticketnumber = $_POST['ticketnumber'];
+        $status = $_POST['status'];
+       // $usrnam =  $_SESSION['username'];
+        $employeename = $_SESSION['username'];
+        $date = date("d-m-Y");
+    $database->query("insert into complaints values ('','$date','$From','$Name','$Phone','$Email','$City','$wrincity','$About','','$employeename','','','0')");
+        header('location:complaintbox.php');
+    }
+        ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -46,20 +63,20 @@ if(!$session->logged_in){
 <div class="main_hed"><span>Complaint Box</span> </div>
 
 <div class="left_body">
-
+<form action="" method="post">
 <div id="form" class="faqs">
 <ol>
 
-<p><li><label>From <span class="star">*</span></label><select data-placeholder="From" class="chzn-select" tabindex="2" style="width:315px;">
-          <option value=""></option> 
-          <option value="United States">Buyer</option> 
-          <option value="United Kingdom">Seller</option>
-          <option value="United Kingdom">Others</option>
+<p><li><label>From <span class="star">*</span></label><select data-placeholder="From" name="From" class="chzn-select" tabindex="2" style="width:315px;">
+          <option value="0"></option>
+          <option value="Buyer">Buyer</option>
+          <option value="Seller">Seller</option>
+          <option value="Others">Others</option>
         </select></li></p>
-<p><li><label>Name <span class="star">*</span></label><input type="text" class="input" /></li></p>
-<p><li><label>Phone Number <span class="star">*</span></label><input type="text" class="input" /></li></p>
-<p><li><label>Email Id</label><input type="text" class="input" /></li></p>
-<p><li><label>City <span class="star">*</span></label><select data-placeholder="Select City" class="chzn-select" tabindex="2" style="width:315px;">
+<p><li><label>Name <span class="star">*</span></label><input type="text" name="Name" class="input" /></li></p>
+<p><li><label>Phone Number <span class="star">*</span></label><input type="text" name="Phone" class="input" /></li></p>
+<p><li><label>Email Id</label><input type="text" class="input" name="Email" /></li></p>
+<p><li><label>City <span class="star">*</span></label><select data-placeholder="Select City" name="City" class="chzn-select" tabindex="2" style="width:315px;">
           <option value=""></option> 
           <option value="United States">United States</option> 
           <option value="United Kingdom">United Kingdom</option> 
@@ -305,7 +322,7 @@ if(!$session->logged_in){
           <option value="Zambia">Zambia</option> 
           <option value="Zimbabwe">Zimbabwe</option>
         </select></li></p>
-<p><li><label>Where in City <span class="star">*</span></label><select data-placeholder="Select Where in City" class="chzn-select" tabindex="2" style="width:315px;">
+<p><li><label>Where in City <span class="star">*</span></label><select data-placeholder="Select Where in City" name="wrincity" class="chzn-select" tabindex="2" style="width:315px;">
           <option value=""></option> 
           <option value="United States">United States</option> 
           <option value="United Kingdom">United Kingdom</option> 
@@ -552,13 +569,13 @@ if(!$session->logged_in){
           <option value="Zimbabwe">Zimbabwe</option>
         </select></li></p>
 
-<p><li><label>About <span class="star">*</span></label><textarea class="textarea"></textarea><br /><span class="description_count"> 125</span></li></p>
+<p><li><label>About <span class="star">*</span></label><textarea class="textarea" name="About"></textarea><br /><span class="description_count"> 125</span></li></p>
 
-<p><li class="buttons" style="float:right;"><a href="#"><input  type="submit" value="POST" class="input_btn"/></a></li></p>
+<p><li class="buttons" style="float:right;"><a href="#"><input type="submit" name="submit" value="POST" class="input_btn"/></a></li></p>
 
 </ol>
 </div>
-
+</form>
 
 </div>
 

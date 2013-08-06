@@ -63,21 +63,21 @@ $(document).ready(function() {
 <body>
 <div id="warp">
 
-<div class="logo"><a href="index_properties.html"><img src="images/logo.png" alt="Redail Logo" /></a></div>
+<div class="logo"><a href="index_properties.php"><img src="images/logo.png" alt="Redail Logo" /></a></div>
 
 <span style="float:right; font-size:11px; padding-top:3px;">&nbsp;&nbsp;&nbsp; Naresh &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#">Logout</a></span>
 <div class="top_menu">
-<a href="messagehistory.html">S & S History</a>|
-<a href="appointments.html">Appointments</a>|
-<a href="agents/agents_new.html">Bulk</a>|
-<a href="buyers.html">Buyers</a>|
-<a href="complaintbox.html">Complaints</a>|
-<a href="domods.html">Do-Mod's</a>|
-<a href="msms.html">M-SMS</a>
+<a href="messagehistory.php">S & S History</a>|
+<a href="appointments.php">Appointments</a>|
+<a href="agents/agents_new.php">Bulk</a>|
+<a href="buyers.php">Buyers</a>|
+<a href="complaintbox.php">Complaints</a>|
+<a href="domods.php">Do-Mod's</a>|
+<a href="msms.php">M-SMS</a>
 </div>
 
 <div class="top_icons" style="margin-top:15px; margin-right:0px; float:right;">
-<a href="properties_add.html"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
+<a href="properties_add.php"><img src="images/list_property.png" alt="List Property" /><br />List property</a>
 </div>
 <div class="search_bg" style="float:right; margin:-30px 100px 0 0;">
 <input type="text" class="src_input" onfocus="if(this.value =='Search ID, Phone & Name' ) this.value=''" onblur="if(this.value=='') this.value='Search ID, Phone & Name'" value="Search ID, Phone & Name" />
@@ -85,8 +85,8 @@ $(document).ready(function() {
 </div>
 
 <ul id="nav-reflection">
-<li><a href="index_properties.html">Properties</a></li>
-<li class="button-color-1"><a href="index_projects.html" class="active">Projects</a></li>		
+<li><a href="index_properties.php">Properties</a></li>
+<li class="button-color-1"><a href="index_projects.php" class="active">Projects</a></li>		
 </ul>
 
 <div class="tabs_bg">
@@ -240,7 +240,7 @@ To <input type="text" class="input_box input_box2" value="Area Max" onfocus="if(
 </div>
 </div>
 
-<a href="projects_search.html"><input type="submit" value="Search" class="input_button" /></a>
+<a href="projects_search.php"><input type="submit" value="Search" class="input_button" /></a>
 
 </ul>
 </div>
@@ -389,7 +389,7 @@ To <input type="text" class="input_box input_box2" value="Area Max" onfocus="if(
 </div>
 </div>
 
-<a href="projects_search.html"><input type="submit" value="Search" class="input_button" /></a>
+<a href="projects_search.php"><input type="submit" value="Search" class="input_button" /></a>
 
 </ul>
 </div>
@@ -543,7 +543,7 @@ To <input type="text" class="input_box input_box2" value="Area Max" onfocus="if(
 </div>
 </div>
 
-<a href="projects_search_ag.html"><input type="submit" value="Search" class="input_button" /></a>
+<a href="projects_search_ag.php"><input type="submit" value="Search" class="input_button" /></a>
 
 </ul>
 </div>

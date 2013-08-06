@@ -43,7 +43,7 @@ class Process
        * by mistake and therefore is redirected.
        */
        else{
-          header("Location:index.php");
+           header("Location:index.php");
        }
    }
 
@@ -56,8 +56,7 @@ class Process
       global $session, $form;
       /* Login attempt */
 
-      $retval = $session->login($_POST['Fristname'], $_POST['Password']);
-      
+      $retval = $session->login($_POST['Firstname'], $_POST['Password']);
       /* Login successful */
       if($retval){
          header("Location: ".$session->referrer);
@@ -91,16 +90,16 @@ class Process
       global $session, $form;
       /* Convert username to all lowercase (by option) */
       if(ALL_LOWERCASE){
-         $_POST['uname'] = strtolower($_POST['uname']);
+         $_POST['username'] = strtolower($_POST['username']);
       }
       /* Registration attempt */
-      $retval = $session->register($_POST['uname'], $_POST['password'], $_POST['emailid'], $_POST['empid'], $_POST['phn'], $_POST['active']);
+      $retval = $session->register($_POST['division'], $_POST['department'], $_POST['name'], $_POST['mobile'], $_POST['email'], $_POST['EmployeeId'], $_POST['city'], $_POST['whrereincity'], $_POST['zone'], $_POST['username'], $_POST['password']);
       
       /* Registration Successful */
       if($retval == 0){
          $_SESSION['reguname'] = $_POST['user'];
          $_SESSION['regsuccess'] = true;
-         header("Location: admin/userlist.php");
+         header("Location: admin/employeelist.php");
       }
       /* Error found with form */
       else if($retval == 1){
@@ -176,9 +175,9 @@ class Process
    function procEditAccount(){
       global $session;
       /* Account edit attempt */
-	  echo $_POST['username'].",". $_POST['email'].",". $_POST['employeeid'].",". $_POST['mobile'].",". $_POST['active'].",". $_POST['EmployeeID'];
+	  echo $_POST['division'].",". $_POST['department'].",".$_POST['name'].",".$_POST['mobile'].",".$_POST['email'].",".$_POST['EmployeeId'].",".$_POST['city'].",".$_POST['whrereincity'].",".$_POST['zone'].",".$_POST['username'].",".$_POST['employeeID'];
      	//exit;
-	  $retval = $session->editAccount($_POST['username'], $_POST['email'], $_POST['employeeid'], $_POST['mobile'], $_POST['active'], $_POST['EmployeeID']);
+	  $retval = $session->editAccount($_POST['division'], $_POST['department'], $_POST['name'], $_POST['mobile'], $_POST['email'], $_POST['EmployeeId'], $_POST['city'], $_POST['whrereincity'], $_POST['zone'], $_POST['username'], $_POST['employeeID']);
 
       /* Account edit successful */
       if($retval){

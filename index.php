@@ -86,7 +86,7 @@ $(document).ready(function() {
 <div class="login_form">
 <form action="process.php" method="post">
 <ol>
-<li><input type="text" name="Fristname" class="input" onfocus="if(this.value =='User name' ) this.value=''" onblur="if(this.value=='') this.value='User name'" value="User name" /></li>
+<li><input type="text" name="Firstname" class="input" onfocus="if(this.value =='User name' ) this.value=''" onblur="if(this.value=='') this.value='User name'" value="User name" /></li>
 <li><input type="password" name="Password" class="input" onfocus="if(this.value =='Password' ) this.value=''" onblur="if(this.value=='') this.value='Password'" value="Password" /></li>
 <li class="buttons" style="float:right;">
 <input type="hidden" name="sublogin" value="1" />
