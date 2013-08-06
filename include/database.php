@@ -141,7 +141,7 @@ class MySQLDB
     * info into the database. Appropriate user level is set.
     * Returns true on success, false otherwise.
     */
-   function addNewUser($username, $password, $email, $empid, $mobile, $active){
+   function addNewUser($division, $department, $name, $mobile, $email, $empid, $city, $whrereincity, $zone, $username, $password){
       $time = time();
       /* If admin sign up, give admin user level */
       if(strcasecmp($username, ADMIN_NAME) == 0){
@@ -149,13 +149,14 @@ class MySQLDB
       }else{
          $ulevel = USER_LEVEL;
       }
+       $active = false;
 	  if($active == "true"){
 	  $active = 1;
 	  }else if($active == "false"){
 	  $active = 0;
 	  }
 	  
-      $q = "INSERT INTO ".TBL_USERS." VALUES ('','$username', '$password', '0', $ulevel, '$email', $time, '$empid', '$mobile', $active)";
+      $q = "INSERT INTO ".TBL_USERS." VALUES ('','$division', '$department', '$name', '$mobile', '$email', '$empid', '$city', '$whrereincity', '$zone', '$username', '$password', '0', '$ulevel', '$time', '0')";
 	  return mysql_query($q, $this->connection); 
    }
    
@@ -163,8 +164,8 @@ class MySQLDB
     * updateUserField - Updates a field, specified by the field
     * parameter, in the user's row of the database.
     */
-   function updateUserField($username, $email, $empid, $mobile, $active, $orempid){
-      $q = "UPDATE ".TBL_USERS." SET username = '$username', email = '$email', EmployeeId = '$empid', Mobile = '$mobile', Active = '$active' WHERE Id = '$orempid'";
+   function updateUserField($division, $department, $name, $mobile, $email, $empid, $city, $whrereincity, $zone, $username, $orempid){
+      $q = "UPDATE ".TBL_USERS." SET division = '$division', department = '$department', name = '$name', mobile = '$mobile', email = '$email', EmployeeId = '$empid', EmployeeId = '$empid', city = '$city', whrereincity = '$whrereincity', zone = '$zone', username = '$username'  WHERE id = '$orempid'";
 	  echo $q;
 	  //exit;
 
@@ -175,6 +176,7 @@ class MySQLDB
       $q = "UPDATE ".TBL_USERS." SET ".$field." = '$value' WHERE username = '$username'";
       return mysql_query($q, $this->connection);
    }
+
    /**
     * getUserInfo - Returns the result array from a mysql
     * query asking for all information stored regarding
@@ -299,7 +301,7 @@ class MySQLDB
       return mysql_query($query, $this->connection);
    }
    function getUserList(){
-		$q = "select Id, username, userid, email, EmployeeId, Mobile, Active from ".TBL_USERS." where userlevel = 1 ORDER BY `timestamp` DESC";
+		$q = "select Id, division, department, name, mobile, email, EmployeeId, city, whrereincity, zone, username, userid, Active from ".TBL_USERS." where userlevel = 1 ORDER BY `timestamp` DESC";
 		if($result = mysql_query($q)){
 		return $result;
 		}else{
@@ -307,40 +309,59 @@ class MySQLDB
 		}	
 	}
 	function getUserListById($id){
-	$q = "select Id, username, userid, email, EmployeeId, Mobile, Active from ".TBL_USERS." where Id = '$id' AND userlevel = 1";		
+	$q = "select Id, division, department, name, mobile, email, EmployeeId, city, whrereincity, zone, username, userid, Active from ".TBL_USERS." where Id = '$id' AND userlevel = 1";
 		if($result = mysql_query($q)){
 		return $result;
 		}else{
 		return 1;
 		}	
 	}
+	function  getDepartmentInfo() {
+	$q = "select * from department order by sno";
+		$result = mysql_query($q);
+			return $result;
+   }
 	function getCityList(){
-		$q = "select * from city";
-		$result = $this->query($q);
+		$q = "select * from city order by city ASC";
+		$result = mysql_query($q);
 		print_r($result);
-		return $result;
+			return $result;
 	}
+    function getCityById($id){
+        $q = "select * from city where sno = '$id'";
+        $result = $this->query($q);
+        $row = mysql_fetch_array($result);
+        return $row['city'];
+    }
 	function getCityList_search($id){
 		$q = "select * from city where sno='$id'";
 		$result = mysql_query($q);
 			return $result;
 	}
-    function getLocationList($city){
-        $q = "select * from location where `city_id`='$city'";
+	function getPropertyList(){
+		$q = "select * from propertytype";
+		$result = mysql_query($q);
+			return $result;
+	}
+    function getPropertyTypeById($id){
+        $q = "select * from `propertytype` where sno='$id'";
         $result = $this->query($q);
-        return $result;
+        $row = mysql_fetch_array($result);
+        return $row['type'];
+
     }
 
-	function getPropertyList($type){
-		$q = "select * from propertytype where `category`='$type'";
+	function getPropertyList_search($id){
+		$q = "select * from propertytype where sno='$id'";
 		$result = mysql_query($q);
 			return $result;
 	}
 	function getlocation(){
-		$q = "select sno,location from location";
+		$q = "select sno,location from location order by location ASC";
 		$result = mysql_query($q);
 			return $result;
 	}
+
     function getMinPrice(){
         // needs to write order by price and type
         $q = "SELECT * FROM minimum";
@@ -360,16 +381,20 @@ class MySQLDB
         return $result;
     }
     function getPriceTypeById($id){
-        if($id == 'L'){
-            $val = 'Lakh(s)';
-        }
-        if($id == 'C'){
-            $val == 'Crore(s)';
-        }
-        if($id == 'R'){
-            $val == 'Rs';
-        }
-        return $val;
+        $q = "select * from pricetype where $id = '$id'";
+        $result = $this->query($q);
+        $row = mysql_fetch_array($result);
+        return $row['py'];
+//        if($id == 'L'){
+//            $val = 'Lakh(s)';
+//        }
+//        if($id == 'C'){
+//            $val == 'Crore(s)';
+//        }
+//        if($id == 'R'){
+//            $val == 'Rs';
+//        }
+//        return $val;
     }
 
     function getBedRooms(){
@@ -381,6 +406,12 @@ class MySQLDB
         $q = "select * from areatype";
         $result = $this->query($q);
         return $result;
+    }
+    function getAreaTypeById($id){
+        $q = "select * from `areatype` where sno = '$id'";
+        $result = $this->query($q);
+        $row = mysql_fetch_array($result);
+        return $row['atype'];
     }
 
     function getPlanList(){
@@ -417,6 +448,361 @@ class MySQLDB
         $q = "INSERT INTO `verify_history`(`id`, `verify`, `property_id`, `date`) VALUES ('','$verified','$id','$date')";
         $this->query($q);
     }
+    function getlocation_search($id){
+        $q = "select location from location where sno='$id'";
+        $result = mysql_query($q);
+        return $result;
+    }
+    function getLocationList($id){
+        $q = "select sno,location from location where city_id = '$id'";
+        $result = mysql_query($q);
+        return $result;
+    }
+    function getLocationById($id){
+        $q = "select `location` from  location where sno = '$id'";
+        $result = $this->query($q);
+        $row = mysql_fetch_array($result);
+        return $row['location'];
+    }
+    function getOwnerShipById($id){
+       $q = "select * from areyou where sno = '$id'";
+        $result = $this->query($q);
+        $row = mysql_fetch_array($result);
+        return $row['areyou'];
+    }
+    function getPaymentTypeById($id){
+     $q = "select * from payment_type where id= '$id'";
+     $result = $this->query($q);
+     $row = mysql_fetch_array($result);
+     return $row['type'];
+    }
+    function getPropertiesList($type,$page){
+        $itemsPerPage = 4;
+        $itemsupto = $page * $itemsPerPage - 1;// index item upto 3,7,11..
+        $page = ($page-1) * $itemsPerPage; // index start like 0,4,8..
+        $q = "select * from `properties` where type = '$type' limit $page,$itemsupto";
+        $result = $this->query($q);
+        return $result;
+    }
+    function getPropertyRowById($id){
+        $q = "select p.*,q.* from properties p, verify_history q where p.property_id = '$id' AND q.property_id = '$id'";
+        $result = $this->query($q);
+        return $result;
+    }
+
+    //////////upto sai edit
+
+    /////newly added
+    function getPropertiesList1($id,$id1){
+        $q = "select * from projects where Ptype = '$id' and ProjectType = '$id1'";
+        //$result = mysql_query($q);
+        return $q;
+    }
+    /*function getPropertiesList1(){
+        $q = "select * from projects where Ptype = '1' and ProjectType = '1'";
+        $result = mysql_query($q);
+            return $result;
+    }
+    function getPropertiesList2(){
+        $q = "select * from projects where Ptype = '2' and ProjectType = '1'";
+        $result = mysql_query($q);
+            return $result;
+    }
+    function getPropertiesList3(){
+        $q = "select * from projects where Ptype = '2' and ProjectType = '2'";
+        $result = mysql_query($q);
+            return $result;
+    }*/
+//    function getProjectList(){
+//        $q = "select * from projects where Ptype = 2";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getAssignjobsType()
+//    {
+//        $q = "select * from asignjob_type order by type ASC";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//
+//    function getCurrentProjectHistory($id){
+//        $q = "select * from projects where Ptype = 2 AND id = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getProjectH(){
+//        $q = "select * from projects where Pid like % 'PJ%'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getProjectH1(){
+//        $q = "select * from projects where Pid like % 'PR%'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//
+//    function getCurrentPropertyHistory($id){
+//        $q = "select * from projects where Ptype = 1 AND id = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getAgentsList($id){
+//        $q = "select * from agents where ptype = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getAgentsList1($id){
+//        $q = "select * from agents where ptype = '$id'";
+//        //$result = mysql_query($q);
+//        return $q;
+//    }
+//    function getAgentsList2($id){
+//        $q = "select * from agents where `id`= '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getCurrentAgentData($id){
+//        $q = "selcet * from agents where id = '$id' ";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getCurrentAgentData1($id){
+//        $q = "SELECT * FROM `agents` WHERE  AgentID = '$id' ";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function del_getCurrentAgentData1($id){
+//        $q = "SELECT * FROM `del_agents` WHERE  AgentID = '$id' ";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getBuyersList($id){
+//        $q = "select * from buyers where ProjectType = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getBuyList($id){
+//        $q = "select * from buyers where Buyerid = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function del_getBuyList($id){
+//        $q = "select * from del_buyers where Buyerid = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    //////////////////////////////
+//    function getBuyersListz($id){
+//        $q = "select * from buyers where id = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    ////////////////////////////////////
+//    function getBuyersList2($id){
+//        $q = "select * from buyers where Buyerid = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    //////newly added
+//    function getBuyersList1($id){
+//        $q = "select * from buyers where ProjectType = '$id'";
+//        //$result = mysql_query($q);
+//        return $q;
+//    }
+//    function getPriceList_Min(){
+//        $q = "select * from minimum";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getPriceList_Max(){
+//        $q = "select * from maximum";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//
+//    function getSearchCategory(){
+//        $q = "select * from search";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getProjectId($id){
+//        $q = "select * from projects where Pid = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function del_getProjectId($id){
+//        $q = "select * from del_projects where Pid = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getSubscriptionC($id){
+//        $q = "select * from subscription where Pid = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getaLLSubscriptionC(){
+//        $q = "select * from subscription";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getsubscription($id){
+//        $q = "select * from subscription where Pid='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getProjectId1($id){
+//        $q = "select * from projects where Pid = '$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function insert_time($id)
+//    {
+//        $time = time();
+//        $q = "insert into time(hfv,verify,active,Pid) values('$time','','','$id')";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getDealinginList(){
+//        $q = "SELECT * from dealing";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getPname($id){
+//        $q = "SELECT * from gc_properties where rctype='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getPnamepj($id){
+//        $q = "SELECT * from gc_projects where rctype='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getGCProperties(){
+//        $q = "SELECT * FROM gc_properties";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getGCPropertiesById($type,$id){
+//        $q = "SELECT * from gc_properties where rctype='$type' AND Pid='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getGCPropertiesId($id){
+//        $q = "SELECT * from gc_properties where Pid='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getGCPropertiesByType($type){
+//        $q = "SELECT * from gc_properties where rctype='$type'";
+//    }
+//    function getGCProjectById($type,$id){
+//        $q =  "SELECT * from gc_projects where rctype='$type' AND Pid='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getGCProjectId($id){
+//        $q =  "SELECT * from gc_projects where Pid='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function getDealingById($id){
+//        $q = "SELECT * FROM dealing where id='$id'";
+//        $result = mysql_query($q);
+//        while($row = mysql_fetch_array($result)){
+//            if($id == $row['Id']){
+//                return $row['Dealing'];
+//            }
+//        }
+//    }
+//    function insert_time_update($id)
+//    {
+//        $time = time();
+//        $q = "update `time` set `hfv`='$time',`deactive`='' where `Pid`='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function insert_time_verify($id)
+//    {
+//        $time = time();
+//        $q = "update `time` set `verify`='$time',`deactive`='' where `Pid`='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function insert_time_active($id)
+//    {
+//        $date2=time()+(30*24*60*60);
+//        $time = time();
+//        $q = "update `time` set `active`='$time',`deactive`='$date2' where `Pid`='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function insert_time_deactive($id)
+//    {
+//        $time = time();
+//        $q = "update `time` set `deactive`='$time' where `Pid`='$id'";
+//        $result = mysql_query($q);
+//        return $result;
+//    }
+//    function get_time($id,$id1)
+//    {
+//        $sql="select * from time where `Pid`='".$id1."'";
+//        $result=mysql_query($sql);
+//        $row=mysql_fetch_array($result);
+//        if($id==0)
+//        {
+//            $time1=date("d/m/y - h:i A", $row['hfv']+41400);
+//            return $time1;
+//        }
+//        if($id==1)
+//        {
+//            $time2=date("d/m/y - h:i A", $row['verify']+41400);
+//            return $time2;
+//        }
+//        if($id==2)
+//        {
+//            $time3=date("d/m/y h:i A", $row['active']+41380);
+//            return $time3;
+//        }
+//        if($id==3)
+//        {
+//            $time4=date("d/m/y h:i A", $row['deactive']+41400);
+//            return $time4;
+//        }
+//    }
+////////////////////////By Shiva//////////////////////////////////
+
+    function getproject_list($type){
+        $q="select * from projects where `type`='$type'";
+        $result=$this->query($q);
+        return $result;
+    }
+    function getsubproject_listbyvariable($property_id){
+        $q="select * from sub_projects where property_id='$property_id'";
+        $result=$this->query($q);
+        return $result;
+    }
+    function getproject_listbyvariable($property_id){
+        $q="select * from projects where project_id='$property_id'";
+        $result=$this->query($q);
+        return $result;
+    }
+    function getAreaTypeyvariable($sno){
+        $atype=null;
+        $q = "select `atype` from areatype where sno='$sno'";
+        $result = $this->query($q);
+
+        while($row=mysql_fetch_array($result))
+        {
+            $atype=$row['atype'];
+        }
+        return $atype;
+    }
+////////////////////////////////////////end shiva////////////////////////////////
+/////////////////////////////////////// By Madhu  ///////////////////////////////
+
+//write your code here
+
+///////////////////////////////////// end Maghu /////////////////////////////////
 
 };
 /* Create database connection */
