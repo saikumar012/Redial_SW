@@ -17,7 +17,7 @@
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB_NAME", "db_projector");
+define("DB_NAME", "projector");
 
 
 /*define("DB_SERVER", "mysql1015.ixwebhosting.com");

@@ -419,6 +419,12 @@ class MySQLDB
         $result = $this->query($q);
         return $result;
     }
+    function getPlanById($id){
+        $q = "select * from plans where id='$id'";
+        $result = $this->query($q);
+        $row = mysql_fetch_array($result);
+        return $row['name'];
+    }
     function getMonthsList(){
         $q = 'select * from months';
         $result = $this->query($q);
@@ -438,9 +444,29 @@ class MySQLDB
     function getExpiryDate($months){
         $expiryMonths = $this->getMonthsValueById($months);
         $today = time(); // just for calculation purpose
-        $expirydate_time = strtotime('+ $expiryMonths ', $today);
-        return date('d/m/Y-H:i:s', $expirydate_time);
-
+        $expiryDate_time = strtotime(+ $expiryMonths , $today);
+        return date('d/m/Y-H:i:s', $expiryDate_time);
+    }
+    function getVerifiedById($id){
+        $q = "select * from verify where id='$id'";
+        $result = $this->query($q);
+        if(mysql_num_rows($result) == 0){
+            return "Not Verified";
+        }else{
+            $row = mysql_fetch_array($result);
+            return $row['status'];
+        }
+    }
+    function getActiveList(){
+        $q = "select * from active";
+        $result = $this->query($q);
+        return $result;
+    }
+    function getActiveById($id){
+     $q = "select * from active where id='$id'";
+     $result = $this->query($q);
+     $row = mysql_fetch_array($result);
+     return $row['status'];
     }
 
     function addToVerifyHistory($id,$verified){
@@ -489,6 +515,28 @@ class MySQLDB
         $result = $this->query($q);
         return $result;
     }
+    function getPaidTypeById($id){
+        if($id == 1){
+            return "Paid";
+        }else{
+            return "Not Paid";
+        }
+    }
+
+    function getEmployeeIdById($id){
+        $q = "select `id`,`username` from users where id='$id'";
+        $result = $this->query($q);
+        $row = mysql_fetch_array($result);
+        return $row['username'];
+
+    }
+    function getProjectCategoryList(){
+        $q = "select * from property_category";
+        $result = $this->query($q);
+        return $result;
+
+    }
+
 
     //////////upto sai edit
 
@@ -801,6 +849,12 @@ class MySQLDB
 /////////////////////////////////////// By Madhu  ///////////////////////////////
 
 //write your code here
+    function getAssignjobsType()
+    {
+        $q = "select * from asignjob_type order by type ASC";
+        $result = mysql_query($q);
+        return $result;
+    }
 
 ///////////////////////////////////// end Maghu /////////////////////////////////
 
