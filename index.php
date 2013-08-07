@@ -3,7 +3,7 @@ include("include/session.php");
 	global $database;
 if($session->logged_in){
  	if($session->isAdmin()){
-		header("Location:admin/home.html");
+		header("Location:admin/home.php");
 	}else {
 		header("Location:index_properties.php");
 	}
@@ -91,7 +91,7 @@ $(document).ready(function() {
 <li class="buttons" style="float:right;">
 <input type="hidden" name="sublogin" value="1" />
 <input  type="submit" value="LOGIN" class="login_btn"/></li>
-<p class="forgot"><a href="forgotps.html">forgot password</a></p><p class="error"><?php echo $form->error("Fristname"); ?><?php echo $form->error("Password"); ?></p>
+<p class="forgot"><a href="forgotps.php">forgot password</a></p><p class="error"><?php echo $form->error("Fristname"); ?><?php echo $form->error("Password"); ?></p>
 </ol>
 </form>
 </div>
